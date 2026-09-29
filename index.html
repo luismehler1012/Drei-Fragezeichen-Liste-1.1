@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f3ec">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<title>Die drei ??? Folgen</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f3ec;--card:#fff;--tx:#1c2333;--mu:#6f7480;--ac:#4d7f6d;--acs:#e3eee9;--bd:#e7e2d7;--star:#c99a2e;--track:#e4dfd3;
+--hf:Bahnschrift,"Barlow Semi Condensed","DIN Alternate","Arial Narrow",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#12161d;--card:#1b212b;--tx:#e9ebef;--mu:#98a0ad;--ac:#6fae98;--acs:#1f3029;--bd:#2a313d;--star:#e0b24a;--track:#2a313d}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-tap-highlight-color:transparent}
+main{max-width:640px;margin:0 auto;padding:20px 16px 32px}
+h1{font-family:var(--hf);font-weight:800;font-size:clamp(2.4rem,11vw,3.4rem);line-height:1;margin:6px 0 18px;letter-spacing:-.5px}
+.bar{height:16px;background:var(--track);border-radius:99px;overflow:hidden}
+.bar div{height:100%;width:0;background:var(--ac);border-radius:99px;transition:width .35s}
+.stat{font-family:var(--hf);font-size:1.35rem;font-weight:600;margin:10px 0 22px}
+.stat b{font-weight:800}
+.stat span{color:var(--mu)}
+h2,.sec{font-family:var(--hf);font-weight:700;font-size:1.25rem;margin:0}
+.secrow{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px}
+.link{background:none;border:none;color:var(--ac);font:600 .95rem var(--hf);padding:4px 0;cursor:pointer}
+.box{margin-bottom:22px}
+button{font:inherit;color:var(--tx)}
+.tog{width:100%;display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 14px;font:700 1.1rem var(--hf);cursor:pointer}
+.grid{display:none;grid-template-columns:repeat(auto-fill,minmax(36px,1fr));gap:5px;margin-top:10px}
+.grid.open{display:grid}
+.t{font-size:.72rem;padding:7px 0;text-align:center;border-radius:8px;background:var(--card);border:1px solid var(--bd);color:var(--mu);cursor:pointer;user-select:none}
+.t.h{background:var(--ac);border-color:var(--ac);color:#fff;font-weight:700}
+input[type=search],textarea{width:100%;font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:11px 13px}
+input[type=search]{margin-bottom:10px}
+.seg{display:flex;gap:6px;margin-bottom:12px}
+.seg button{flex:1;padding:10px 4px;border:1px solid var(--bd);background:var(--card);border-radius:12px;font:600 1rem var(--hf);cursor:pointer}
+.seg button.on{background:var(--tx);border-color:var(--tx);color:var(--bg)}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.row.h{background:var(--acs)}
+.chk{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid var(--bd);display:grid;place-items:center;color:transparent;font-weight:700;background:var(--card)}
+.row.h .chk{background:var(--ac);border-color:var(--ac);color:#fff}
+.n{flex:none;width:2.3em;font-family:var(--hf);font-weight:700;color:var(--mu)}
+.ti{flex:1;min-width:0;overflow-wrap:anywhere;font-weight:500}
+.rt{flex:none;color:var(--star);font-weight:700;font-size:.9rem;white-space:nowrap}
+.mu{color:var(--mu);font-size:.9rem}
+.foot{display:flex;gap:8px;justify-content:center;margin-top:18px}
+.foot button{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 14px;cursor:pointer}
+#sheet{display:none;position:fixed;inset:0;z-index:10;background:var(--bg);overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 14px) 18px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.in{max-width:640px;margin:0 auto}
+.back{background:none;border:none;font:700 1.05rem var(--hf);color:var(--ac);padding:6px 0;cursor:pointer}
+.dn{font-family:var(--hf);font-weight:700;color:var(--mu);margin-top:14px}
+#sheet h2{font-size:clamp(1.9rem,8vw,2.6rem);font-weight:800;line-height:1.05;margin:2px 0 16px}
+.hbtn{width:100%;padding:13px;border-radius:14px;border:1px solid var(--bd);background:var(--card);font:700 1.1rem var(--hf);cursor:pointer}
+.hbtn.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.lab{font-family:var(--hf);font-weight:700;font-size:1.1rem;margin:22px 0 8px}
+.big span{font-size:2.4rem;color:var(--track);cursor:pointer;padding:0 3px;user-select:none}
+.big span.on{color:var(--star)}
+textarea{resize:vertical}
+.lnk{display:block;padding:12px 14px;margin-bottom:8px;border:1px solid var(--bd);background:var(--card);border-radius:12px;color:var(--tx);text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<main>
+<h1>Die drei ??? Folgen</h1>
+<div class="bar"><div id="pb"></div></div>
+<div class="stat" id="stat"></div>
+
+<section class="box" id="daily"></section>
+
+<section class="box">
+  <button class="tog" data-a="grid"><span>Folgenübersicht</span><span id="chev">▾</span></button>
+  <div class="grid" id="grid"></div>
+</section>
+
+<input type="search" id="q" placeholder="Folge oder Titel suchen…">
+<div class="seg" id="seg">
+  <button data-a="flt" data-f="all" class="on">Alle</button><button data-a="flt" data-f="un">Ungehört</button><button data-a="flt" data-f="h">Gehört</button>
+</div>
+<div id="list"></div>
+<div class="foot"><button data-a="exp">Export</button><button data-a="imp">Import</button></div>
+</main>
+
+<div id="sheet"><div class="in" id="sin"></div></div>
+
+<script>
+(function(){
+var RAW="~der Super-Papagei|~der Phantomsee|~der Karpatenhund|~die schwarze Katze|~der Fluch des Rubins|~der sprechende Totenkopf|~der unheimliche Drache|~der grüne Geist|~die rätselhaften Bilder|~die flüsternde Mumie|~das Gespensterschloß|~der seltsame Wecker|~der lachende Schatten|~das Bergmonster|~der rasende Löwe|~der Zauberspiegel|~die gefährliche Erbschaft|~die Geisterinsel|~der Teufelsberg|~die flammende Spur|~der tanzende Teufel|~der verschwundene Schatz|~das Aztekenschwert|~die silberne Spinne|~die singende Schlange|~die Silbermine|~der magische Kreis|~der Doppelgänger||~das Riff der Haie|~das Narbengesicht|~der Ameisenmensch|~die bedrohte Ranch|~der rote Pirat|~der Höhlenmensch|~der Super-Wal|~der heimliche Hehler|~der unsichtbare Gegner|~die Perlenvögel|~der Automarder|~das Volk der Winde|~der weinende Sarg|~der höllische Werwolf|~der gestohlene Preis|~das Gold der Wikinger|~der schrullige Millionär|~der giftige Gockel|~die gefährlichen Fässer|~die Comic-Diebe|~der verschwundene Filmstar|~der riskante Ritt|~die Musikpiraten|~die Automafia|Gefahr im Verzug|Gekaufte Spieler|Angriff der Computer-Viren|Tatort Zirkus|~der verrückte Maler|Giftiges Wasser|Dopingmixer|~die Rache des Tigers|Spuk im Hotel|Fußball-Gangster|Geisterstadt|Diamantenschmuggel|~die Schattenmänner|~das Geheimnis der Särge|~der Schatz im Bergsee|Späte Rache|Schüsse aus dem Dunkel|~die verschwundene Seglerin|Dreckiger Deal|Poltergeist|~das brennende Schwert|Die Spur des Raben|Stimmen aus dem Nichts|Pistenteufel|Das leere Grab|Im Bann des Voodoo|Geheimakte UFO|Verdeckte Fouls|Die Karten des Bösen|Meuterei auf hoher See|Die Musik des Teufels|Feuerturm|Nacht in Angst|Wolfsgesicht|Vampir im Internet|Tödliche Spur|Der Feuerteufel|Labyrinth der Götter|Todesflug|~das Geisterschiff|Das schwarze Monster|Botschaft von Geisterhand|~der rote Rächer|Insektenstachel|Tal des Schreckens|Rufmord|Toteninsel|~das Hexenhandy|Doppelte Täuschung|Das Erbe des Meisterdiebs|Gift per Email|~der Nebelberg|Der Mann ohne Kopf|~der Schatz der Mönche|Die sieben Tore|Gefährliches Quiz|Panik im Park|Die Höhle des Grauens|Schlucht der Dämonen|Das Auge des Drachen|Die Villa der Toten|Auf tödlichem Kurs|Codename: Cobra|Der finstere Rivale|Das düstere Vermächtnis|Der geheime Schlüssel|Der schwarze Skorpion|Spur ins Nichts|~der Geisterzug|Fußballfieber|Geister-Canyon|Feuermond|Schrecken aus dem Moor|Schwarze Madonna|Schatten über Hollywood|SMS aus dem Grab|Der Fluch des Drachen|Haus des Schreckens|Spuk im Netz|Fels der Dämonen|Der tote Mönch|Fluch des Piraten|~das versunkene Dorf|Pfad der Angst|Die geheime Treppe|Das Geheimnis der Diva|Stadt der Vampire|~die Fußball-Falle|Tödliches Eis|~die Poker-Hölle|Zwillinge der Finsternis|~die Rache der Samurai|Der Biss der Bestie|Grusel auf Campbell Castle|~die feurige Flut|Der namenlose Gegner|Geisterbucht|Schwarze Sonne|Skateboardfieber|~das Fußball-Phantom|Botschaft aus der Unterwelt|~der Meister des Todes|Im Netz des Drachen|Im Zeichen der Schlangen|~der Feuergeist|Nacht der Tiger|Geheimnisvolle Botschaften|Die blutenden Bilder|~der schreiende Nebel|~der verschollene Pilot|Fußball-Teufel|Im Schatten des Giganten|~die brennende Stadt|~das blaue Biest|GPS-Gangster|Die Spur des Spielers|Straße des Grauens|~das Phantom aus dem Meer|~der Eisenmann|Dämon der Rache|~das Tuch der Toten|Schattenwelt|~der gestohlene Sieg|Der Geist des Goldgräbers|Der gefiederte Schrecken|Die Rache des Untoten|~die flüsternden Puppen|Das Kabinett des Zauberers|Im Haus des Henkers|~der letzte Song|~der Hexengarten|~der Mann ohne Augen|Insel des Vergessens|~das silberne Amulett|Signale aus dem Jenseits|~der unsichtbare Passagier|~die Kammer der Rätsel|Verbrechen im Nichts|Im Bann des Drachen|Schrecken aus der Tiefe|~die Zeitreisende|Im Reich der Ungeheuer|Geheimnis des Bauchredners|Im Auge des Sturms|Die Legende der Gaukler|~der grüne Kobold|Feuriges Auge|Höhenangst|Das weiße Grab|Tauchgang ins Ungewisse|Der dunkle Wächter|Das rätselhafte Erbe|~der Mottenmann|Die falschen Detektive|Kelch des Schicksals|Kreaturen der Nacht|Die schweigende Grotte|~der Jadekönig|~der weiße Leopard|Der Fluch der Medusa|~der Geisterbunker|~die verlorene Zeit|Die Schwingen des Unheils|~der Kristallschädel|Im Netz der Lügen|~die Teufelsklippe|Im Wald der Gefahren|Manuskript des Satans|~die Gesetzlosen|~der Knochenmann|Die Yacht des Verrats|~der Puppenmacher|Die Spur der Toten|Melodie der Rache|Der Ruf der Krähen|Drehbuch der Täuschung|Der Tag der Toten|~der Dreiäugige Schakal|Die Stadt aus Gold|Die Nacht der Gewitter|~der lebende Tresor|~das Fantasmofon|Im Bann des Barrakudas|~der rote Büffel|Falsche Schuld|Das Geheimnis der sieben Palmen|~die schwarze Rose|Meister des Lichts";
+var EP=[],BY={};
+RAW.split("|").forEach(function(t,i){if(t){var e={n:i+1,t:t.charAt(0)==="~"?"…und "+t.slice(1):t};EP.push(e);BY[e.n]=e}});
+var KEY="ddf-tracker-v1",UK="ddf-ui-v1",DK="ddf-daily-v1",flt="all";
+function $(i){return document.getElementById(i)}
+function ls(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v||d}catch(e){return d}}
+function ss(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var S=ls(KEY,{}),U=ls(UK,{grid:1});
+function st(n){return S[n]||(S[n]={h:0,r:0})}
+function save(){ss(KEY,S)}
+function isH(n){return S[n]&&S[n].h}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function stars(n,cls){var h='<div class="'+cls+'">';for(var i=1;i<=5;i++)h+='<span data-a="star" data-n="'+n+'" data-v="'+i+'" class="'+(i<=(S[n]?S[n].r:0)?"on":"")+'">★</span>';return h+"</div>"}
+function todayKey(){var d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function pickDaily(force){
+  var pool=EP.filter(function(e){return isH(e.n)}).map(function(e){return e.n});
+  var D=ls(DK,{d:"",p:[]});
+  var p=(D.p||[]).filter(isH);
+  if(force||D.d!==todayKey()||(!p.length&&pool.length)){
+    var a=pool.slice();
+    for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}
+    p=a.slice(0,5);ss(DK,{d:todayKey(),p:p});
+  }
+  return p;
+}
+function rowHTML(e){
+  var h=isH(e.n),r=S[e.n]?S[e.n].r:0;
+  return '<div class="row'+(h?" h":"")+'" data-a="open" data-n="'+e.n+'"><div class="chk" data-a="chk" data-n="'+e.n+'">✓</div><div class="n">'+e.n+'</div><div class="ti">'+esc(e.t)+'</div><div class="rt">'+(r?"★ "+r:"")+'</div></div>';
+}
+function renderDaily(){
+  var p=pickDaily(false),h='<div class="secrow"><h2>Heute nochmal hören</h2>'+(p.length?'<button class="link" data-a="shuffle">Neu mischen</button>':"")+'</div>';
+  h+=p.length?p.map(function(n){return rowHTML(BY[n])}).join(""):'<div class="mu">Markiere Folgen als gehört, dann bekommst du hier jeden Tag bis zu 5 Vorschläge zum erneuten Hören.</div>';
+  $("daily").innerHTML=h;
+}
+function renderList(){
+  var q=$("q").value.toLowerCase();
+  var l=EP.filter(function(e){var h=isH(e.n);return(flt==="all"||(flt==="h"&&h)||(flt==="un"&&!h))&&(!q||(e.n+" "+e.t).toLowerCase().indexOf(q)>-1)});
+  $("list").innerHTML=l.length?l.map(rowHTML).join(""):'<div class="mu">Nichts gefunden.</div>';
+}
+function render(){
+  var hc=EP.filter(function(e){return isH(e.n)}).length;
+  $("pb").style.width=(hc/EP.length*100)+"%";
+  $("stat").innerHTML='<b>'+hc+'</b> von '+EP.length+' gehört <span>· </span><b>'+(EP.length-hc)+'</b> offen';
+  $("grid").innerHTML=EP.map(function(e){return '<div class="t'+(isH(e.n)?" h":"")+'" data-a="tile" data-n="'+e.n+'">'+e.n+'</div>'}).join("");
+  $("grid").className="grid"+(U.grid?" open":"");
+  $("chev").textContent=U.grid?"▴":"▾";
+  renderDaily();renderList();
+}
+function pad(n){return("00"+n).slice(-3)}
+function sheet(n){
+  var e=BY[n],s=st(n),h=s.h;
+  $("sin").innerHTML='<button class="back" data-a="close">← Zurück</button><div class="dn">Folge '+n+'</div><h2>'+esc(e.t)+'</h2>'
+  +'<button class="hbtn'+(h?" on":"")+'" data-a="hear" data-n="'+n+'">'+(h?"✓ Gehört":"Als gehört markieren")+'</button>'
+  +'<div class="lab">Meine Bewertung</div>'+stars(n,"big")
+  +'<div class="lab">Meine Notizen</div><textarea id="note" rows="5" placeholder="Was hat dir gefallen? Lieblingsszenen, Gedanken …">'+esc(s.t||"")+'</textarea>'
+  +'<div class="lab">Inhaltsangabe</div>'
+  +'<a class="lnk" target="_blank" rel="noopener" href="https://www.rocky-beach.com/hoerspiel/folgen/'+pad(n)+'.html">Inhaltsangabe & Details ansehen →</a>'
+  +'<a class="lnk" target="_blank" rel="noopener" href="https://open.spotify.com/search/'+encodeURIComponent("Die drei ??? "+e.t.replace("…",""))+'">Auf Spotify suchen →</a>';
+}
+function open(n){sheet(n);$("sheet").style.display="block";$("sheet").scrollTop=0;document.body.style.overflow="hidden";try{history.pushState({d:1},"")}catch(e){}window.__n=n}
+function hide(){$("sheet").style.display="none";document.body.style.overflow="";window.__n=0}
+window.addEventListener("popstate",function(){hide()});
+document.addEventListener("input",function(e){if(e.target.id==="note"&&window.__n){st(window.__n).t=e.target.value;save()}});
+$("q").addEventListener("input",renderList);
+document.addEventListener("click",function(ev){
+  var el=ev.target.closest("[data-a]");if(!el)return;
+  var a=el.dataset.a,n=+el.dataset.n;
+  if(a==="tile"||a==="chk"){var s=st(n);s.h=s.h?0:1;save();render()}
+  else if(a==="open")open(n);
+  else if(a==="close"){if(history.state&&history.state.d)history.back();else hide()}
+  else if(a==="hear"){var s2=st(n);s2.h=s2.h?0:1;save();render();sheet(n)}
+  else if(a==="star"){var s3=st(n),v=+el.dataset.v;s3.r=s3.r===v?0:v;if(s3.r)s3.h=1;save();render();sheet(n)}
+  else if(a==="grid"){U.grid=U.grid?0:1;ss(UK,U);render()}
+  else if(a==="shuffle"){pickDaily(true);renderDaily()}
+  else if(a==="flt"){flt=el.dataset.f;Array.prototype.forEach.call($("seg").children,function(b){b.className=b.dataset.f===flt?"on":""});renderList()}
+  else if(a==="exp"){var x=JSON.stringify(S);try{navigator.clipboard.writeText(x);alert("Daten in die Zwischenablage kopiert.")}catch(e){prompt("Daten kopieren:",x)}}
+  else if(a==="imp"){var y=prompt("Exportierte Daten einfügen:");if(!y)return;try{var o=JSON.parse(y);if(o&&typeof o==="object"){S=o;save();render()}}catch(e){alert("Ungültige Daten.")}}
+});
+render();
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(function(){})}
+})();
+</script>
+</body>
+</html>
